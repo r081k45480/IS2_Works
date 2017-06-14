@@ -41,6 +41,7 @@
 		</tr>
 		<tr>
 			<td>
+				<hr>
 				<table>
 					<tr><th> Task</th><th>Utroseno sati</th></tr>
 					
@@ -67,6 +68,8 @@
 		</tr>
 	</c:forEach>
 	</table>
+	<br/>
+	<h3> Dodaj radnika na projkat</h3>
 	<form action="/WorksWeb/proj/dodajradnika" method="post">
 		<input type="hidden" name="p"  value="${proj.id }"/>
 		<select name="r">
