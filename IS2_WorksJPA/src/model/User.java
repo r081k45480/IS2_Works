@@ -167,10 +167,21 @@ public class User implements Serializable {
 		return user;
 	}
 
-	private static String[] uloge = {"Manager", "Radnik"};
+	private static String[] uloge = {
+										"Radnik",
+										"Manager"
+									};
 	
 	public static String[] uloge() {
 		return uloge;
 	}
+	
+	public static String ulogaRadnik(){
+		return uloge[0].toUpperCase();
+	}
+	public static String ulogaManager(){
+		return uloge[1].toUpperCase();
+	}
+	
 
 }

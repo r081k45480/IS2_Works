@@ -41,7 +41,28 @@
 		</tr>
 		<tr>
 			<td>
-				taskoviii
+				<table>
+					<tr><th> Task</th><th>Utroseno sati</th></tr>
+					
+					<c:forEach items="${map[r.username]}" var="t">
+						<tr>
+							<td> ${t.opis}</td>
+							<td> ${t.utroseno}</td>
+						</tr>
+					</c:forEach>
+					
+					<tr>
+						<form action="/WorksWeb/proj/addtask" method="post">
+							<td>
+								<input type="text" name="opis" value="novi task..."/>
+								<input type="hidden" name="p" value="${proj.id }"/>
+								<input type="hidden" name="u" value="${r.username }"/>
+							
+							</td>
+							<td><input type="submit" value="Dodaj"/></td>
+						</form>
+					</tr>
+				</table>
 			</td>
 		</tr>
 	</c:forEach>
@@ -59,7 +80,21 @@
 
 <c:if test="${!empty user.manager}">
 
-	taskoviii
+	<table>
+		<tr><th> Task</th><th>Utroseno sati</th></tr>
+		<c:forEach var="t" items="${mojitaskovi}">
+			<tr>
+				<td> ${t.opis }</td>
+				<td>
+					<form action="/WorksWeb/proj/utrosio" method="post">
+						Utrosio: <input type="text" name="utrosio" value="${t.utroseno}"/>
+								<input type="hidden" name="tid" value="${t.id }"/>
+						<input type="submit" value="+"/>
+					</form>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
 </c:if>
 
 </body>

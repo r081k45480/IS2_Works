@@ -41,7 +41,7 @@ public class UserController {
 	@RequestMapping(value="save", method=RequestMethod.POST)
 	public String saveClan(Model m, @ModelAttribute("user") User user, HttpServletRequest r){		
 		User manager = Common.getUlogovan(r);
-		if(!user.getUloga().equals("MANAGER"))
+		if(!user.getUloga().equals(User.ulogaManager()))
 			user.setManager(manager);
 		
 		userRepo.save(user);
@@ -62,7 +62,7 @@ public class UserController {
 		List<Projekat> projs = null;
 		List<User> radnici = new LinkedList<>();
 		
-		if(u.getUloga().equals("MANAGER")){
+		if(u.getUloga().equals(User.ulogaManager())){
 			projs = projRepo.findByManager(u);
 			radnici = userRepo.findByManager(u);
 		} else {

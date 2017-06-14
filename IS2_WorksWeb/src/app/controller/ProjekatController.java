@@ -1,8 +1,11 @@
 package app.controller;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import app.repository.ProjRepo;
 import app.repository.RadRepo;
+import app.repository.TaskRepo;
 import app.repository.UserRepo;
 import model.Projekat;
 import model.Rad;
+import model.Task;
 import model.User;
 
 @Controller
@@ -35,6 +40,10 @@ public class ProjekatController {
 	
 	@Autowired
 	RadRepo radRepo;
+	
+	
+	@Autowired
+	TaskRepo taskRepo;
 	
 	@RequestMapping(value="init", method=RequestMethod.GET)
 	public String getuloge(Model m, HttpServletRequest request){
@@ -72,8 +81,22 @@ public class ProjekatController {
 		List<User> workers = userRepo.findWorkers(p);
 		List<User> oworkers = userRepo.findMyWorkersNotOnProject(p,user);
 		
+		
+		
 		if(!p.getManager().getUsername().equals(user.getUsername())){
 			m.addAttribute("manager", p.getManager());
+		}
+		
+		if(user.getUloga().equals(User.ulogaRadnik())){
+			List<Task> tasks = taskRepo.findByUsernameAndProjectId(user.getUsername(), p.getId());
+			m.addAttribute("mojitaskovi", tasks);
+		} else {
+			Map<String, List<Task>> map = new HashMap<>();
+			for(User w : workers){
+				List<Task> t = taskRepo.findByUsernameAndProjectId(w.getUsername(), p.getId());
+				map.put(w.getUsername(), t);
+			}
+			m.addAttribute("map", map);
 		}
 		
 		m.addAttribute("radnici", workers);
@@ -93,5 +116,24 @@ public class ProjekatController {
 		radRepo.save(rad);
 		
 		return showproj(m, p, request);
+	}
+	
+	@RequestMapping(value="addtask", method=RequestMethod.POST)
+	public String addTask(Model m, String opis, Integer p, String u, HttpServletRequest request){
+		Task t = new Task();
+		t.setOpis(opis);
+		t.setRad(radRepo.findByUsernameAndProj(u, p));
+		taskRepo.save(t);
+		
+		return showproj(m, p, request);
+	}
+	
+	@RequestMapping(value="utrosio", method=RequestMethod.POST)
+	public String utrosio(Model m, String utrosio, Integer tid, HttpServletRequest request){
+		Task t = taskRepo.findOne(tid);
+		t.setUtroseno(BigDecimal.valueOf(Double.parseDouble(utrosio))); 	
+		taskRepo.save(t);
+		
+		return showproj(m, t.getRad().getProjekat().getId(), request);
 	}
 }
