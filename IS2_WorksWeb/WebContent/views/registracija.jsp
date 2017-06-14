@@ -8,7 +8,7 @@
 <title>Novi radnik</title>
 </head>
 <body>
-<h2><a href="WorksWeb/users/initIndex" >M A I N</a></h2>
+<h2><a href="/WorksWeb/users/initIndex" >M A I N</a></h2>
 	<form:form action="/WorksWeb/users/save" method="post" modelAttribute="user">
 		<table>
  		    <tr><td>Uloga:</td><td>

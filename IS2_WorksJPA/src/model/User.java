@@ -68,7 +68,7 @@ public class User implements Serializable {
 	}
 
 	public void setUloga(String uloga) {
-		this.uloga = uloga;
+		this.uloga = uloga.toUpperCase();
 	}
 
 	public List<Komentar> getKomentars() {
@@ -165,6 +165,12 @@ public class User implements Serializable {
 		user.setManager(null);
 
 		return user;
+	}
+
+	private static String[] uloge = {"Manager", "Radnik"};
+	
+	public static String[] uloge() {
+		return uloge;
 	}
 
 }

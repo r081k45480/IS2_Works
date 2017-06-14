@@ -30,7 +30,9 @@ public class UserController {
 	
 	@RequestMapping(value="init", method=RequestMethod.GET)
 	public String getuloge(Model m, HttpServletRequest request){
-		List<String> uloge = Arrays.asList("Manager", "Radnik");
+		
+		List<String> uloge = Arrays.asList(User.uloge());
+		
 		request.setAttribute("uloge", uloge);
 		m.addAttribute("user", new User());
 		return "registracija";
@@ -39,7 +41,8 @@ public class UserController {
 	@RequestMapping(value="save", method=RequestMethod.POST)
 	public String saveClan(Model m, @ModelAttribute("user") User user, HttpServletRequest r){		
 		User manager = Common.getUlogovan(r);
-		user.setManager(manager);
+		if(!user.getUloga().equals("MANAGER"))
+			user.setManager(manager);
 		
 		userRepo.save(user);
 		m.addAttribute("poruka","User je uspesno dodat");
@@ -48,10 +51,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="initIndex", method=RequestMethod.GET)
-	public String initIndex(Model m, HttpServletRequest req){
-		User u = userRepo.findOne("robii");
-		
-		Common.setUlogovan(req, u);
+	public String initIndex(Model m, HttpServletRequest req, String username){
+		User u;
+		if(username!=null){
+			u = userRepo.findOne(username);
+			Common.setUlogovan(req, u);
+		} else
+			u = Common.getUlogovan(req);
 		
 		List<Projekat> projs = null;
 		List<User> radnici = new LinkedList<>();

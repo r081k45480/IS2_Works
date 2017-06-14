@@ -11,6 +11,8 @@
 </head>
 <body>
 
+<h2><a href="/WorksWeb/users/initIndex" >M A I N</a></h2>
+
 	<c:set var="today" value="<%=new Date()%>" />
 	<form:form action="/WorksWeb/proj/save" method="post" modelAttribute="proj">
 		<table>
