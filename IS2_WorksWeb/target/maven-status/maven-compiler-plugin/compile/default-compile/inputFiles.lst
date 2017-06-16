@@ -1,5 +1,14 @@
 D:\Projects\IS2_Works\IS2_WorksWeb\src\app\config\RootConfig.java
-D:\Projects\IS2_Works\IS2_WorksWeb\src\app\converter\CustomWebBindingInitializer.java
+D:\Projects\IS2_Works\IS2_WorksWeb\src\app\controller\Common.java
+D:\Projects\IS2_Works\IS2_WorksWeb\src\app\repository\UserRepo.java
+D:\Projects\IS2_Works\IS2_WorksWeb\src\app\reports\ReportProjekta.java
+D:\Projects\IS2_Works\IS2_WorksWeb\src\app\controller\ReportContoller.java
+D:\Projects\IS2_Works\IS2_WorksWeb\src\app\config\SpringSecurityInitializer.java
+D:\Projects\IS2_Works\IS2_WorksWeb\src\app\controller\ProjekatController.java
+D:\Projects\IS2_Works\IS2_WorksWeb\src\app\repository\ProjRepo.java
 D:\Projects\IS2_Works\IS2_WorksWeb\src\app\config\AppInitializer.java
+D:\Projects\IS2_Works\IS2_WorksWeb\src\app\reports\ReportSviProjekti.java
+D:\Projects\IS2_Works\IS2_WorksWeb\src\app\repository\TaskRepo.java
 D:\Projects\IS2_Works\IS2_WorksWeb\src\app\controller\UserController.java
+D:\Projects\IS2_Works\IS2_WorksWeb\src\app\repository\RadRepo.java
 D:\Projects\IS2_Works\IS2_WorksWeb\src\app\config\WebConfig.java

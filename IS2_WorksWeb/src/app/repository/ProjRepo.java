@@ -18,4 +18,7 @@ public interface ProjRepo extends JpaRepository<Projekat, Integer>{
 	
 	@Query(value="SELECT p FROM Projekat p JOIN FETCH p.rads r WHERE r.user = :u")
 	public List<Projekat> findByRadnik(@Param("u") User u);
+	@Query("SELECT p FROM Projekat p ORDER BY p.manager.username")
+	public List<Projekat> findAllOrderByManager();
+
 }

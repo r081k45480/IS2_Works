@@ -21,7 +21,7 @@ public class Task implements Serializable {
 
 	private String opis;
 
-	private BigDecimal utroseno;
+	private Double utroseno;
 
 	//bi-directional many-to-one association to Komentar
 	@OneToMany(mappedBy="task")
@@ -50,11 +50,11 @@ public class Task implements Serializable {
 		this.opis = opis;
 	}
 
-	public BigDecimal getUtroseno() {
+	public Double getUtroseno() {
 		return this.utroseno;
 	}
 
-	public void setUtroseno(BigDecimal utroseno) {
+	public void setUtroseno(Double utroseno) {
 		this.utroseno = utroseno;
 	}
 

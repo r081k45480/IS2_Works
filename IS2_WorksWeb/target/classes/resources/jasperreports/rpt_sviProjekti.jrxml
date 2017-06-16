@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-06-15T22:05:41 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_sviProjekti.rxml" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab005aa9-1f7b-4349-aca0-d031b8ed1255">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="naziv" class="java.lang.String"/>
+	<field name="opis" class="java.lang.String"/>
+	<field name="pocetak" class="java.util.Date"/>
+	<field name="planZavrsetka" class="java.util.Date"/>
+	<field name="manager.imePrezime" class="java.lang.String"/>
+	<field name="zavrseno" class="java.util.Date"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{manager.imePrezime}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="100" height="30" backcolor="#B9BEC7" uuid="084a43d6-6fa9-4e5f-9dbb-87b476622c1f"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Projekti menadzera]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="100" y="0" width="190" height="30" backcolor="#B9BEC7" uuid="447ec5ee-10be-44f7-82b9-18f054c96181"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{manager.imePrezime}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="25"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="90" y="18" width="360" height="30" uuid="35870a08-0a4a-4fa1-82db-e8ed12ff4a0b"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="18"/>
+				</textElement>
+				<text><![CDATA[Izvestaj svih projekata]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="100" height="30" uuid="6965bb13-e8f2-446b-8532-52dbc0af838a"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Za dan:]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="110" y="10" width="100" height="30" uuid="6e7c5144-463b-4de1-b3c0-670a94b08bcb"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="30" width="100" height="30" backcolor="#1F5D9C" uuid="62e7a25b-095d-4dfe-aae0-1df46c722480"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NAZIV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="100" y="30" width="190" height="30" backcolor="#1F5D9C" uuid="59d9db21-769c-4559-89f5-c73f31ea4ce4"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[OPIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="290" y="30" width="110" height="30" backcolor="#1F5D9C" uuid="5ad9309e-c952-43a0-9f4e-e9e04ddfd286"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[POCETAK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="400" y="30" width="100" height="30" backcolor="#1F5D9C" uuid="f1f11837-66f2-4773-9af8-aeee0eae63bd"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[PLAN ZAVRSETKA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="500" y="30" width="75" height="30" backcolor="#1F5D9C" uuid="b1a2059e-23ff-4d28-b66b-fd80f2fa7d81"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<text><![CDATA[ZAVRSENO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="100" height="30" backcolor="#8DB4EB" uuid="0195ca61-a91d-47de-909a-40ec9c200590"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{naziv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="100" y="0" width="190" height="30" backcolor="#8DB4EB" uuid="b3d0822a-7a1c-496e-8351-dd35d4bcb219"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{opis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="290" y="0" width="110" height="30" backcolor="#8DB4EB" uuid="a3e72a13-1676-41fc-9b06-97f3f5d1df06"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pocetak}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="400" y="0" width="100" height="30" backcolor="#8DB4EB" uuid="3ff38830-8675-4d9f-95b6-30d2b4d57133"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{planZavrsetka}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="500" y="0" width="75" height="30" backcolor="#8DB4EB" uuid="321bdac1-54f4-4659-8076-828919a493c8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{zavrseno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="390" y="10" width="100" height="30" uuid="e050ecfb-0d3c-4819-a9ae-b108a2fdd66a"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

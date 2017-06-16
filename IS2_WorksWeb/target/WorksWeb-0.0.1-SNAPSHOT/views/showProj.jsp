@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<%@page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -55,12 +53,12 @@
 					</c:forEach>
 					
 					<tr>
-						<form action="/WorksWeb/proj/admin/addtask" method="post">
+						<form action="/WorksWeb/proj/addtask" method="post">
 							<td>
 								<input type="text" name="opis" value="novi task..."/>
 								<input type="hidden" name="p" value="${proj.id }"/>
 								<input type="hidden" name="u" value="${r.username }"/>
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							
 							</td>
 							<td><input type="submit" value="Dodaj"/></td>
 						</form>
@@ -72,14 +70,13 @@
 	</table>
 	<br/>
 	<h3> Dodaj radnika na projkat</h3>
-	<form action="/WorksWeb/proj/admin/dodajradnika" method="post">
+	<form action="/WorksWeb/proj/dodajradnika" method="post">
 		<input type="hidden" name="p"  value="${proj.id }"/>
 		<select name="r">
 			<c:forEach items="${ostaliradnici}" var="r">
 				<option value="${r.username }">${r.imePrezime }</option>
 			</c:forEach>
 		</select>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="submit" value="Dodaj na projekat"/>
 	</form>
 	
@@ -101,7 +98,6 @@
 					<form action="/WorksWeb/proj/utrosio" method="post">
 						Utrosio: <input type="text" name="utrosio" value="${t.utroseno}"/>
 								<input type="hidden" name="tid" value="${t.id }"/>
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						<input type="submit" value="+"/>
 					</form>
 				</td>

@@ -8,8 +8,18 @@
 <title>Novi radnik</title>
 </head>
 <body>
-	<c:forEach items="${uloge}" var="u">
-		<h1>${u}</h1>
-	</c:forEach>
+<h2><a href="/WorksWeb/users/initIndex" >M A I N</a></h2>
+	<form:form action="/WorksWeb/users/save" method="post" modelAttribute="user">
+		<table>
+ 		    <tr><td>Uloga:</td><td>
+ 		    <form:select path="uloga" items="${uloge}"/>
+  			</td></tr> 
+  			<tr><td>Ime i prezime:</td><td><form:input type="text" name="imePrezime" path="imePrezime"/></td></tr>
+  			<tr><td>Username:</td><td><form:input type="text" name="username" path="username"/></td></tr>
+  			<tr><td><input type="submit" value="Sacuvaj"/></td></tr>
+  		</table>
+  	</form:form>
+  	
+  	<h3><i>${poruka }</i></h3>
 </body>
 </html>

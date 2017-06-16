@@ -22,6 +22,8 @@ public class User implements Serializable {
 	private String imePrezime;
 
 	private String uloga;
+	
+	private String password;
 
 	//bi-directional many-to-one association to Komentar
 	@OneToMany(mappedBy="user")
@@ -165,6 +167,14 @@ public class User implements Serializable {
 		user.setManager(null);
 
 		return user;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	private static String[] uloge = {

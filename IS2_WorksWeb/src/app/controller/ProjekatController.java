@@ -1,6 +1,5 @@
 package app.controller;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -45,13 +45,13 @@ public class ProjekatController {
 	@Autowired
 	TaskRepo taskRepo;
 	
-	@RequestMapping(value="init", method=RequestMethod.GET)
+	@RequestMapping(value="admin/init", method=RequestMethod.GET)
 	public String getuloge(Model m, HttpServletRequest request){
 		m.addAttribute("proj", new Projekat());
-		return "newProj";
+		return "admin/newProj";
 	}
 	
-	@RequestMapping(value="save", method=RequestMethod.POST)
+	@RequestMapping(value="admin/save", method=RequestMethod.POST)
 	public String saveClan(Model m, @ModelAttribute("proj") Projekat proj, HttpServletRequest req){
 		System.out.println("Saving new user...");
 		
@@ -107,7 +107,7 @@ public class ProjekatController {
 	}
 	
 	
-	@RequestMapping(value="dodajradnika", method=RequestMethod.POST)
+	@RequestMapping(value="admin/dodajradnika", method=RequestMethod.POST)
 	public String dodajRadnika(Model m, Integer p, String r, HttpServletRequest request){
 		Rad rad = new Rad();
 		rad.setProjekat(projRepo.findOne(p));
@@ -118,7 +118,7 @@ public class ProjekatController {
 		return showproj(m, p, request);
 	}
 	
-	@RequestMapping(value="addtask", method=RequestMethod.POST)
+	@RequestMapping(value="admin/addtask", method=RequestMethod.POST)
 	public String addTask(Model m, String opis, Integer p, String u, HttpServletRequest request){
 		Task t = new Task();
 		t.setOpis(opis);
@@ -131,7 +131,7 @@ public class ProjekatController {
 	@RequestMapping(value="utrosio", method=RequestMethod.POST)
 	public String utrosio(Model m, String utrosio, Integer tid, HttpServletRequest request){
 		Task t = taskRepo.findOne(tid);
-		t.setUtroseno(BigDecimal.valueOf(Double.parseDouble(utrosio))); 	
+		t.setUtroseno(Double.parseDouble(utrosio)); 	
 		taskRepo.save(t);
 		
 		return showproj(m, t.getRad().getProjekat().getId(), request);

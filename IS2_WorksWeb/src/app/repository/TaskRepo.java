@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import model.Projekat;
 import model.Task;
 
 @Repository
@@ -14,4 +15,7 @@ public interface TaskRepo extends JpaRepository<Task, Integer>{
 
 	@Query("SELECT t FROM Task t WHERE t.rad.projekat.id = :p AND t.rad.user.username = :u")
 	public List<Task> findByUsernameAndProjectId(@Param("u") String u, @Param("p") Integer p);
+
+	@Query("SELECT t FROM Task t WHERE t.rad.projekat = :p ORDER BY t.rad.user.username")
+	public List<Task> findByPojectWithUser(@Param("p") Projekat p);
 }

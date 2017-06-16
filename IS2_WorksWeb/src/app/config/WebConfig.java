@@ -4,6 +4,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.view.jasperreports.JasperReportsViewResol
 @Configuration
 @EnableWebMvc
 @ComponentScan("app")
+@Import({SecurityConfig.class})
 public class WebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public ViewResolver viewResolver() {
@@ -66,4 +68,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	    resolver.setOrder(0);
 	    return resolver;
 	}
+	
+	
 }

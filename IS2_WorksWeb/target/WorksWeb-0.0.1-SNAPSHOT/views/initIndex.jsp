@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-<%@page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,14 +10,12 @@
 </head>
 <body>
 <h1>${user.imePrezime}</h1>
-<h2><a href="<c:url value="/logout" />" >logout</a></h2>
-
 <c:if test="${empty user.manager}">
 	<h3><i>-manager-</i></h3>
 
 
-	<p><a href="/WorksWeb/proj/admin/init">Novi projekat</a></p>
-	<p><a href="/WorksWeb/users/admin/init">Novi radnikprojekat</a></p>
+	<p><a href="/WorksWeb/proj/init">Novi projekat</a></p>
+	<p><a href="/WorksWeb/users/init">Novi radnikprojekat</a></p>
 	
 	<h2>Radnici:</h2>
 	<table border="1">
