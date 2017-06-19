@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,8 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import app.repository.ProjRepo;
 import app.repository.UserRepo;
@@ -42,7 +39,7 @@ public class UserController {
 		
 		List<String> uloge = Arrays.asList(User.uloge());
 		
-		request.setAttribute("uloge", uloge);
+		request.getSession().setAttribute("uloge", uloge);
 		m.addAttribute("user", new User());
 		return "admin/registracija";
 	}
@@ -52,6 +49,12 @@ public class UserController {
 		User manager = Common.getUlogovan(r);
 		if(!user.getUloga().equals(User.ulogaManager()))
 			user.setManager(manager);
+		
+		if(userRepo.findOne(user.getUsername()) != null){
+			m.addAttribute("user", user);
+			m.addAttribute("poruka","Username je zauzet!</br>Pokusajte drugi");
+			return "admin/registracija";
+		}
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setPassword(encoder.encode(user.getPassword()));
@@ -88,23 +91,7 @@ public class UserController {
 		
 		return "initIndex";
 	}
-	/*
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(
-		@RequestParam(value = "error", required = false) String error,
-		@RequestParam(value = "logout", required = false) String logout) {
-
-		ModelAndView model = new ModelAndView();
-		if (error != null) {
-			model.addObject("error", "Invalid username and password!");
-		}
-
-		model.setViewName("login");
-
-		return model;
-
-	}*/
-	
+		
 	@RequestMapping(value = {"logout"}, method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

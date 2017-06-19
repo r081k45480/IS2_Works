@@ -9,37 +9,48 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Works evidence</title>
+<link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>" />
 </head>
 <body>
 <h1>${user.imePrezime}</h1>
-<h2><a href="<c:url value="/logout" />" >logout</a></h2>
+<p><a href="<c:url value="/logout" />" >logout</a></p>
 
 <c:if test="${empty user.manager}">
 	<h3><i>-manager-</i></h3>
 
 
-	<p><a href="/WorksWeb/proj/admin/init">Novi projekat</a></p>
-	<p><a href="/WorksWeb/users/admin/init">Novi radnikprojekat</a></p>
+	<p><a href="/WorksWeb/proj/admin/init">Novi projekat</a>
+	<a href="/WorksWeb/users/admin/init">Novi radnik</a></p>
 	
+	
+	<div class="text-container">
 	<h2>Radnici:</h2>
-	<table border="1">
+	<table>
 	<c:forEach items="${radnici}" var="p">
 		<tr><td>${p.imePrezime}</td></tr>
 	</c:forEach>
 	</table>
+	</div>
 	
 	
-	<h3>
-	<i>
-	<a href="/WorksWeb/reports/SviProjekti.pdf">Izvestaj svih projekata</a>
-	</i>
-	</h3>
 </c:if>
+
+<div class="text-container">
 <h2>Projekti:</h2>
-<table border = "1">
+<table>
 	<c:forEach items="${projs}" var="p">
 		<tr><td><a href="/WorksWeb/proj/showproj?id=${p.id}">${p.naziv }</a></td></tr>
 	</c:forEach>
 </table>
+</div>
+
+
+<c:if test="${empty user.manager}">
+<h3>
+	<i>
+		<a href="/WorksWeb/reports/SviProjekti.pdf">Izvestaj svih projekata</a>
+	</i>
+</h3>
+</c:if>
 </body>
 </html>

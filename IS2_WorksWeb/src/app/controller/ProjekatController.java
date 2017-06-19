@@ -128,6 +128,13 @@ public class ProjekatController {
 		return showproj(m, p, request);
 	}
 	
+	@RequestMapping(value="admin/zavrsiproj", method=RequestMethod.POST)
+	public String addTask(Model m, Integer p, HttpServletRequest request){
+		Projekat proj = projRepo.findOne(p);
+		proj.setZavrseno(new Date());
+		projRepo.save(proj);
+		return showproj(m, p, request);
+	}
 	@RequestMapping(value="utrosio", method=RequestMethod.POST)
 	public String utrosio(Model m, String utrosio, Integer tid, HttpServletRequest request){
 		Task t = taskRepo.findOne(tid);

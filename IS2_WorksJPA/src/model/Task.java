@@ -23,9 +23,6 @@ public class Task implements Serializable {
 
 	private Double utroseno;
 
-	//bi-directional many-to-one association to Komentar
-	@OneToMany(mappedBy="task")
-	private List<Komentar> komentars;
 
 	//bi-directional many-to-one association to Rad
 	@ManyToOne
@@ -56,28 +53,6 @@ public class Task implements Serializable {
 
 	public void setUtroseno(Double utroseno) {
 		this.utroseno = utroseno;
-	}
-
-	public List<Komentar> getKomentars() {
-		return this.komentars;
-	}
-
-	public void setKomentars(List<Komentar> komentars) {
-		this.komentars = komentars;
-	}
-
-	public Komentar addKomentar(Komentar komentar) {
-		getKomentars().add(komentar);
-		komentar.setTask(this);
-
-		return komentar;
-	}
-
-	public Komentar removeKomentar(Komentar komentar) {
-		getKomentars().remove(komentar);
-		komentar.setTask(null);
-
-		return komentar;
 	}
 
 	public Rad getRad() {

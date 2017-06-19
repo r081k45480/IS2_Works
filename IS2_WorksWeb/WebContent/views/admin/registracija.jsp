@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Novi radnik</title>
+<link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>" />
 </head>
 <body>S
 <h2><a href="/WorksWeb/users/initIndex" >M A I N</a></h2>
@@ -19,8 +20,8 @@
   			<tr><td>Ime i prezime:</td><td><form:input type="text" name="imePrezime" path="imePrezime"/></td></tr>
   			<tr><td>Username:</td><td><form:input type="text" name="username" path="username"/></td></tr>
   			<tr><td>Password:</td><td><form:input type="text" name="password" path="password"/></td></tr>
-  			<tr><td><input type="submit" value="Sacuvaj"/></td></tr>
   		</table>
+  			<input type="submit" value="Sacuvaj"/>
   	</form:form>
   	
   	<h3><i>${poruka }</i></h3>

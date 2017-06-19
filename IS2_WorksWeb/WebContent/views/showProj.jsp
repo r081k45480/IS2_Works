@@ -10,6 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Works evidence</title>
+<link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>" />
 </head>
 <body>
 
@@ -23,7 +24,7 @@
 		</i>
 	</c:if>
 </h3>
-
+<div class="text-container">
 <h3>${proj.opis }</h3>
 <h5> Pocetak projekta: <fmt:formatDate pattern="yyyy-MM-dd" value="${proj.pocetak }"/></h5>
 <h5> Planiran zavrsetak: <fmt:formatDate pattern="yyyy-MM-dd" value="${proj.planZavrsetka }"/></h5>
@@ -31,21 +32,37 @@
 <c:if test="${!empty proj.zavrseno }">
 	<h5> Zavrsen: <fmt:formatDate pattern="yyyy-MM-dd" value="${proj.zavrseno }"/></h5>
 </c:if>
-	
+	</div>
 <c:if test="${empty user.manager}">
+<div class="text-container">
+<h3> Dodaj radnika na projkat</h3>
+	<form action="/WorksWeb/proj/admin/dodajradnika" method="post">
+		<input type="hidden" name="p"  value="${proj.id }"/>
+		<select name="r">
+			<c:forEach items="${ostaliradnici}" var="r">
+				<option value="${r.username }">${r.imePrezime }</option>
+			</c:forEach>
+		</select>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="submit" value="Dodaj na projekat"/>
+	</form>
+	<hr>
+	<form action="/WorksWeb/proj/admin/zavrsiproj" method="post">
+		<input type="hidden" name="p"  value="${proj.id }"/>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="submit" value="Zavrsi projekat"/>
+	</form>
+	</div>
+	<div class="text-container">
 	<h2>Radnici projekta:</h2>
-	<table>
+	</div>
 	<c:forEach items="${radnici}" var="r">
-		<tr>
-			<td>
-			<b>${r.imePrezime}</b>
-			</td>
-		</tr>
-		<tr>
-			<td>
+		<div class="text-container">
+		
+			<h3><b>${r.imePrezime}</b></h3>
 				<hr>
 				<table>
-					<tr><th> Task</th><th>Utroseno sati</th></tr>
+					<tr><th> Taskovi </th><th>Utroseno sati</th></tr>
 					
 					<c:forEach items="${map[r.username]}" var="t">
 						<tr>
@@ -60,38 +77,24 @@
 								<input type="text" name="opis" value="novi task..."/>
 								<input type="hidden" name="p" value="${proj.id }"/>
 								<input type="hidden" name="u" value="${r.username }"/>
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							</td>
 							<td><input type="submit" value="Dodaj"/></td>
 						</form>
 					</tr>
 				</table>
-			</td>
-		</tr>
+			
+		</div>
 	</c:forEach>
-	</table>
 	<br/>
-	<h3> Dodaj radnika na projkat</h3>
-	<form action="/WorksWeb/proj/admin/dodajradnika" method="post">
-		<input type="hidden" name="p"  value="${proj.id }"/>
-		<select name="r">
-			<c:forEach items="${ostaliradnici}" var="r">
-				<option value="${r.username }">${r.imePrezime }</option>
-			</c:forEach>
-		</select>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		<input type="submit" value="Dodaj na projekat"/>
-	</form>
 	
-	<h3>
-	<i>
-		<a href="/WorksWeb/reports/Projekat.pdf?pid=${proj.id }">Izvestaj projekta</a>
-	</i>
-	</h3>
+	
+	
 </c:if>
 
 <c:if test="${!empty user.manager}">
 
+<div class="text-container">
 	<table>
 		<tr><th> Task</th><th>Utroseno sati</th></tr>
 		<c:forEach var="t" items="${mojitaskovi}">
@@ -108,7 +111,15 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
 </c:if>
 
+<c:if test="${empty user.manager}">
+<h3>
+	<i>
+		<a href="/WorksWeb/reports/Projekat.pdf?pid=${proj.id }">Izvestaj projekta</a>
+	</i>
+</h3>
+</c:if>
 </body>
 </html>

@@ -25,10 +25,6 @@ public class User implements Serializable {
 	
 	private String password;
 
-	//bi-directional many-to-one association to Komentar
-	@OneToMany(mappedBy="user")
-	private List<Komentar> komentars;
-
 	//bi-directional many-to-one association to Projekat
 	@OneToMany(mappedBy="manager")
 	private List<Projekat> projekats;
@@ -71,28 +67,6 @@ public class User implements Serializable {
 
 	public void setUloga(String uloga) {
 		this.uloga = uloga.toUpperCase();
-	}
-
-	public List<Komentar> getKomentars() {
-		return this.komentars;
-	}
-
-	public void setKomentars(List<Komentar> komentars) {
-		this.komentars = komentars;
-	}
-
-	public Komentar addKomentar(Komentar komentar) {
-		getKomentars().add(komentar);
-		komentar.setUser(this);
-
-		return komentar;
-	}
-
-	public Komentar removeKomentar(Komentar komentar) {
-		getKomentars().remove(komentar);
-		komentar.setUser(null);
-
-		return komentar;
 	}
 
 	public List<Projekat> getProjekats() {
